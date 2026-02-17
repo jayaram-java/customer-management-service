@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.customermanagement.customer_management_service.dto.CustomerRequestDto;
 import com.bank.customermanagement.customer_management_service.service.CustomerDetailsService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController // @Controller + @ResponseBody //REST web services
 @RequestMapping("/api/bank")
+@Tag(name = "Customer APIs", description = "Operations related to customers")
 public class CustomerDetailsController {
 
 	private static final Logger logger = LogManager.getLogger(CustomerDetailsController.class);
@@ -35,6 +39,7 @@ public class CustomerDetailsController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/createcustomer")
+	@Operation(summary = "Create Customer", description = "Creates a new customer record")
 	public ResponseEntity<String> createCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
 		
 		 logger.info("POST /api/customers called");

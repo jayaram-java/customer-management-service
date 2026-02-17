@@ -35,8 +35,8 @@ public class WebSecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-      //  authProvider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -63,6 +63,12 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()  // login, register
                     .requestMatchers("/api/test/**").permitAll()  // optional
+                    .requestMatchers(
+                    		 "/swagger-ui/**",
+                             "/v3/api-docs/**",
+                             "/swagger-ui.html",
+                             "/api-docs/**"
+                    	).permitAll()
                     .anyRequest().authenticated()                 // everything else secured
             );
 
