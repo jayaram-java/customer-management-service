@@ -3,12 +3,16 @@ package com.bank.customermanagement.customer_management_service.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
-@Embeddable
+@Embeddable // composite table
 public class CustomerAccountId implements Serializable {
 
+	@Column(name = "customer_id")
 	private Long customerId;
+
+	@Column(name = "account_id")
 	private Long accountId;
 
 	public CustomerAccountId() {
